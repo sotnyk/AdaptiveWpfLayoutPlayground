@@ -16,6 +16,8 @@
         <StackPanel.Resources>
             <Style TargetType="{x:Type TextBlock}">
                 <Setter Property="FontSize" Value="14"/>
+                <Setter Property="VerticalAlignment" Value="Center"/>
+                <Setter Property="Margin" Value="10"/>
             </Style>
         </StackPanel.Resources>
 
@@ -37,12 +39,24 @@
                            Grid.ColumnSpan="2" 
                            MaxWidth="{Binding ActualWidth, ElementName=TopLevelContainer}">
                     <Image Source="{StaticResource FaceImageSource}" Width="48"/>
-                    <TextBlock Text="{Binding DisplayName}" Margin="10" VerticalAlignment="Center"/>
-                    <TextBlock Text="{Binding Id}" Margin="10" VerticalAlignment="Center"/>
-                    <TextBlock Text="{Binding Birthday}" Margin="10" VerticalAlignment="Center"/>
-                    <TextBlock Text="{Binding Age}" Margin="10" VerticalAlignment="Center"/>
-                    <TextBlock Text="{Binding Address}" Margin="10" VerticalAlignment="Center"/>
+                    <TextBlock Text="{Binding DisplayName}" />
+                    <TextBlock Text="{Binding Id}" />
+                    <TextBlock Text="{Binding Birthday}" />
+                    <TextBlock Text="{Binding Age}"  />
+                    <TextBlock Text="{Binding Address}"/>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="Attending:"/>
+                        <TextBlock Text="{Binding AttendingDoctor}"/>
+                        <TextBlock Text="Deputy:"/>
+                        <TextBlock Text="{Binding DeputyDoctor}"/>
+                    </StackPanel>
+                    <TextBlock Text="{Binding Email}"/>
                 </WrapPanel>
+                <DataGrid Grid.Column="0" Grid.Row="2" 
+                    ItemsSource="{Binding Plans}"
+                    IsReadOnly="True" CanUserReorderColumns="False" GridLinesVisibility="None" SelectionMode="Single">
+                    
+                </DataGrid>
             </Grid>
         </ScrollViewer>
         <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
