@@ -6,16 +6,29 @@
         xmlns:local="clr-namespace:AdaptiveWpfLayout"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
-    <d:Window.DataContext>
+    <Window.DataContext>
         <local:MainWindowViewModel/>
-    </d:Window.DataContext>
+    </Window.DataContext>
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Name="NavigationColumn" MinWidth="200" Width="*"/>
             <ColumnDefinition Name="DetailColumn" Width="2*"/>
         </Grid.ColumnDefinitions>
-        <ListBox DataContext="Items">
-            
-        </ListBox>
+        <DataGrid Name="NavigationList" ItemsSource="{Binding Items}" AutoGenerateColumns="False"
+                  IsReadOnly="True" SelectionMode="Single" GridLinesVisibility="None">
+            <DataGrid.Columns>
+                <DataGridTextColumn Binding="{Binding Id}" Header="ID">
+                    <DataGridTextColumn.ElementStyle>
+                        <Style>
+                            <Setter Property="TextBlock.TextAlignment" Value="Right" />
+                            <Setter Property="TextBlock.Margin" Value="5,0" />
+                        </Style>
+                    </DataGridTextColumn.ElementStyle>
+                </DataGridTextColumn>
+                <DataGridTextColumn Binding="{Binding DisplayName}" Header="Surname, Name" Width="*"/>
+            </DataGrid.Columns>            
+        </DataGrid>
+        <local:DetailUC Grid.Column="1"
+            DataContext="{Binding SelectedValue, ElementName=NavigationList}" />
     </Grid>
 </Window>

@@ -6,7 +6,48 @@
              xmlns:local="clr-namespace:AdaptiveWpfLayout"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
-    <Grid>
-            
-    </Grid>
+    <UserControl.Resources>
+        <BitmapImage x:Key="FaceImageSource" UriSource="Face.png" />
+    </UserControl.Resources>
+    <d:UserControl.DataContext>
+        <local:DemoPerson/>
+    </d:UserControl.DataContext>
+    <StackPanel VerticalAlignment="Stretch" Name="TopLevelContainer">
+        <StackPanel.Resources>
+            <Style TargetType="{x:Type TextBlock}">
+                <Setter Property="FontSize" Value="14"/>
+            </Style>
+        </StackPanel.Resources>
+
+        <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                <TextBlock FontSize="24">Personal information</TextBlock>
+                <WrapPanel Grid.Column="0" Grid.Row="1" Orientation="Horizontal"
+                           Grid.ColumnSpan="2" 
+                           MaxWidth="{Binding ActualWidth, ElementName=TopLevelContainer}">
+                    <Image Source="{StaticResource FaceImageSource}" Width="48"/>
+                    <TextBlock Text="{Binding DisplayName}" Margin="10" VerticalAlignment="Center"/>
+                    <TextBlock Text="{Binding Id}" Margin="10" VerticalAlignment="Center"/>
+                    <TextBlock Text="{Binding Birthday}" Margin="10" VerticalAlignment="Center"/>
+                    <TextBlock Text="{Binding Age}" Margin="10" VerticalAlignment="Center"/>
+                    <TextBlock Text="{Binding Address}" Margin="10" VerticalAlignment="Center"/>
+                </WrapPanel>
+            </Grid>
+        </ScrollViewer>
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+            <Button Content="Apply" Margin="10"/>
+            <Button Content="Cancel" Margin="10"/>
+        </StackPanel>
+    </StackPanel>
 </UserControl>

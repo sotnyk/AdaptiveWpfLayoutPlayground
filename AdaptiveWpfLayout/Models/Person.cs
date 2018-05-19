@@ -9,6 +9,7 @@ namespace AdaptiveWpfLayout
         public long Id { get; set; }
         public string DisplayName { get; set; }
         public DateTime Birthday { get; set; }
+        public string Age { get => (DateTime.Now.Year - Birthday.Year).ToString() + " y"; }
         public string Address { get; set; }
         public string AttendingDoctor { get; set; }
         public string DeputyDoctor { get; set; }
