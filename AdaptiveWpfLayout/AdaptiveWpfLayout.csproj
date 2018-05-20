@@ -74,6 +74,8 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Converters\AdaptiveIntConverter.cs" />
+    <Compile Include="Converters\IsLessThanConverter.cs" />
     <Compile Include="MainWindowViewModel.cs" />
     <Compile Include="Models\DemoPerson.cs" />
     <Compile Include="Services\PersonsGenerator.cs" />

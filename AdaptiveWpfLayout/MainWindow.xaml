@@ -11,7 +11,7 @@
     </Window.DataContext>
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Name="NavigationColumn" MinWidth="200" Width="*"/>
+            <ColumnDefinition Name="NavigationColumn" MinWidth="150" MaxWidth="300" Width="*"/>
             <ColumnDefinition Name="DetailColumn" Width="2*"/>
         </Grid.ColumnDefinitions>
         <DataGrid Name="NavigationList" ItemsSource="{Binding Items}" AutoGenerateColumns="False"

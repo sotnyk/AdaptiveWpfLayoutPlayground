@@ -1,4 +1,5 @@
-﻿using System;
+﻿using GalaSoft.MvvmLight;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -23,6 +24,37 @@ namespace AdaptiveWpfLayout
         public DetailUC()
         {
             InitializeComponent();
+            if (ViewModelBase.IsInDesignModeStatic) return;
+            
+        }
+
+        private const int OneColumnDesignWidth = 1024;
+        private int? _columns = null;
+
+        protected override void OnPropertyChanged(DependencyPropertyChangedEventArgs e)
+        {
+            base.OnPropertyChanged(e);
+            if (e.Property.Name == nameof(ActualWidth))
+            {
+                if (ActualWidth < OneColumnDesignWidth)
+                {
+                    if (_columns == 1) return;
+                    Column1.Width = new GridLength(0, GridUnitType.Pixel);
+                    Grid.SetColumn(FilesGrid, 0);
+                    Grid.SetRow(FilesGrid, 3);
+                    Grid.SetColumnSpan(FieldsPanel, 1);
+                    _columns = 1;
+                }
+                else
+                {
+                    if (_columns == 2) return;
+                    Column1.Width = new GridLength(1, GridUnitType.Star);
+                    Grid.SetColumn(FilesGrid, 1);
+                    Grid.SetRow(FilesGrid, 2);
+                    Grid.SetColumnSpan(FieldsPanel, 2);
+                    _columns = 2;
+                }
+            }
         }
     }
 }
