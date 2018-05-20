@@ -28,7 +28,7 @@ namespace AdaptiveWpfLayout
             
         }
 
-        private const int OneColumnDesignWidth = 1024;
+        private const int OneColumnDesignWidth = 1150;
         private int? _columns = null;
 
         protected override void OnPropertyChanged(DependencyPropertyChangedEventArgs e)

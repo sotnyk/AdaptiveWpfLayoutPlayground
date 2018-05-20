@@ -13,14 +13,18 @@
     <d:UserControl.DataContext>
         <local:DemoPerson/>
     </d:UserControl.DataContext>
-    <StackPanel VerticalAlignment="Stretch" Name="TopLevelContainer">
-        <StackPanel.Resources>
+    <Grid Name="TopLevelContainer">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <Grid.Resources>
             <Style TargetType="{x:Type TextBlock}">
                 <Setter Property="FontSize" Value="14"/>
                 <Setter Property="VerticalAlignment" Value="Center"/>
                 <Setter Property="Margin" Value="10"/>
             </Style>
-        </StackPanel.Resources>
+        </Grid.Resources>
 
         <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto">
             <Grid Name="CentralLayoutGrid">
@@ -68,9 +72,9 @@
                     Margin="10" Name="FilesGrid"/>
             </Grid>
         </ScrollViewer>
-        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+        <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Center">
             <Button Content="Apply" Margin="10"/>
             <Button Content="Cancel" Margin="10"/>
         </StackPanel>
-    </StackPanel>
+    </Grid>
 </UserControl>
