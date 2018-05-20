@@ -8,7 +8,6 @@
              d:DesignHeight="450" d:DesignWidth="800">
     <UserControl.Resources>
         <BitmapImage x:Key="FaceImageSource" UriSource="Face.png" />
-        <local:IsLessThanConverter x:Key="IsLessThanConverter"/>
     </UserControl.Resources>
     <d:UserControl.DataContext>
         <local:DemoPerson/>
@@ -63,18 +62,77 @@
                     IsReadOnly="True" CanUserReorderColumns="False" 
                     GridLinesVisibility="None" SelectionMode="Single"
                     VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto"
-                    Margin="10" Name="PlansGrid"/>
+                    Margin="10" Name="PlansGrid" AutoGeneratingColumn="Grid_AutoGeneratingColumn_HideInDesign"/>
                 <DataGrid Grid.Column="2" Grid.Row="2" 
                     ItemsSource="{Binding Files}"
                     IsReadOnly="True" CanUserReorderColumns="False" 
                     GridLinesVisibility="None" SelectionMode="Single"
                     VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto"
-                    Margin="10" Name="FilesGrid"/>
+                    Margin="10" Name="FilesGrid" AutoGeneratingColumn="Grid_AutoGeneratingColumn_HideInDesign"/>
+
+                <Grid Name="ParametersPanel" 
+                            Grid.Row="4" Grid.ColumnSpan="2" 
+                            Grid.IsSharedSizeScope="True" Height="150">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+                    <ListView Name="ParametersFixedPart" Margin="10,0"
+                              ItemsSource="{Binding ParametersFixed}" BorderThickness="0">
+                        <ListView.Resources>
+                            <Style TargetType="{x:Type GridViewColumnHeader}">
+                                <Setter Property="Width" Value="Auto"/>
+                            </Style>
+                        </ListView.Resources>
+                        <ListView.View>
+                            <GridView>
+                                <GridViewColumn Header="Name" DisplayMemberBinding="{Binding ParameterName}"/>
+                                <GridViewColumn Header="Value1" DisplayMemberBinding="{Binding Value1}"/>
+                                <GridViewColumn Header="Value2" DisplayMemberBinding="{Binding Value2}"/>
+                                <GridViewColumn Header="Value3" DisplayMemberBinding="{Binding Value3}"/>
+                                <GridViewColumn Header="Value4" DisplayMemberBinding="{Binding Value4}"/>
+                                <GridViewColumn Header="Uploaded" DisplayMemberBinding="{Binding UploadDate}"/>
+                                <GridViewColumn Header="Prescribed" DisplayMemberBinding="{Binding PrescriptionDate}"/>
+                                <GridViewColumn Header="Prescribed by" DisplayMemberBinding="{Binding PrescribedBy}"/>
+                                <GridViewColumn Header="Validated" DisplayMemberBinding="{Binding LastValidationDate}"/>
+                                <GridViewColumn Header="Validated by" DisplayMemberBinding="{Binding LastValidatedBy}"/>
+                            </GridView>
+                        </ListView.View>
+
+                    </ListView>
+                    <ListView Name="ParametersScrolledPart" Margin="10,0"
+                              ItemsSource="{Binding ParametersScrolled}" 
+                              BorderThickness="0"
+                              Grid.Row="1">
+                        <ListView.Resources>
+                            <Style TargetType="GridViewColumnHeader">
+                                <Setter Property="Visibility" Value="Collapsed" />
+                            </Style>
+                        </ListView.Resources>
+                        <ListView.Background>
+                            <SolidColorBrush Color="{DynamicResource {x:Static SystemColors.InactiveCaptionColorKey}}"/>
+                        </ListView.Background>
+                        <ListView.View >
+                            <GridView>
+                                <GridViewColumn DisplayMemberBinding="{Binding ParameterName}" Width="{Binding View.Columns[0].ActualWidth, ElementName=ParametersFixedPart}" />
+                                <GridViewColumn DisplayMemberBinding="{Binding Value1}" Width="{Binding View.Columns[1].ActualWidth, ElementName=ParametersFixedPart}"/>
+                                <GridViewColumn DisplayMemberBinding="{Binding Value2}" Width="{Binding View.Columns[2].ActualWidth, ElementName=ParametersFixedPart}"/>
+                                <GridViewColumn DisplayMemberBinding="{Binding Value3}" Width="{Binding View.Columns[3].ActualWidth, ElementName=ParametersFixedPart}"/>
+                                <GridViewColumn DisplayMemberBinding="{Binding Value4}" Width="{Binding View.Columns[4].ActualWidth, ElementName=ParametersFixedPart}"/>
+                                <GridViewColumn DisplayMemberBinding="{Binding UploadDate}" Width="{Binding View.Columns[5].ActualWidth, ElementName=ParametersFixedPart}"/>
+                                <GridViewColumn DisplayMemberBinding="{Binding PrescriptionDate}" Width="{Binding View.Columns[6].ActualWidth, ElementName=ParametersFixedPart}"/>
+                                <GridViewColumn DisplayMemberBinding="{Binding PrescribedBy}" Width="{Binding View.Columns[7].ActualWidth, ElementName=ParametersFixedPart}"/>
+                                <GridViewColumn DisplayMemberBinding="{Binding LastValidationDate}" Width="{Binding View.Columns[8].ActualWidth, ElementName=ParametersFixedPart}"/>
+                                <GridViewColumn DisplayMemberBinding="{Binding LastValidatedBy}" Width="{Binding View.Columns[9].ActualWidth, ElementName=ParametersFixedPart}"/>
+                            </GridView>
+                        </ListView.View>
+                    </ListView>
+                </Grid>
             </Grid>
         </ScrollViewer>
         <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Center">
-            <Button Content="Apply" Margin="10"/>
-            <Button Content="Cancel" Margin="10"/>
+            <Button Content="Apply" Margin="10" Padding="10,1"/>
+            <Button Content="Cancel" Margin="10" Padding="10,1"/>
         </StackPanel>
     </Grid>
 </UserControl>

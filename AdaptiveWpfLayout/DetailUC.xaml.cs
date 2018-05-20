@@ -25,7 +25,6 @@ namespace AdaptiveWpfLayout
         {
             InitializeComponent();
             if (ViewModelBase.IsInDesignModeStatic) return;
-            
         }
 
         private const int OneColumnDesignWidth = 1150;
@@ -43,6 +42,7 @@ namespace AdaptiveWpfLayout
                     Grid.SetColumn(FilesGrid, 0);
                     Grid.SetRow(FilesGrid, 3);
                     Grid.SetColumnSpan(FieldsPanel, 1);
+                    Grid.SetColumnSpan(ParametersPanel, 1);
                     _columns = 1;
                 }
                 else
@@ -52,9 +52,16 @@ namespace AdaptiveWpfLayout
                     Grid.SetColumn(FilesGrid, 1);
                     Grid.SetRow(FilesGrid, 2);
                     Grid.SetColumnSpan(FieldsPanel, 2);
+                    Grid.SetColumnSpan(ParametersPanel, 2);
                     _columns = 2;
                 }
             }
         }
+
+        private void Grid_AutoGeneratingColumn_HideInDesign(object sender, DataGridAutoGeneratingColumnEventArgs e)
+        {
+            if (e.PropertyName == nameof(ViewModelBase.IsInDesignMode))
+                e.Cancel = true;
+        }        
     }
 }

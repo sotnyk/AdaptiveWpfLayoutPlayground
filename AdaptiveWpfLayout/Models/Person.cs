@@ -1,6 +1,8 @@
 ﻿using GalaSoft.MvvmLight;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.Linq;
 
 namespace AdaptiveWpfLayout
 {
@@ -16,6 +18,8 @@ namespace AdaptiveWpfLayout
         public string Email { get; set; }
         public IList<Document> Plans { get; set; } = new List<Document>();
         public IList<Document> Files { get; set; } = new List<Document>();
-        public IList<Parameters> Parameters { get; set; } = new List<Parameters>();
+        public IList<Parameters> Parameters { get; set; } = new ObservableCollection<Parameters>();
+        public IList<Parameters> ParametersFixed { get=> Parameters.Take(3).ToList(); }
+        public IList<Parameters> ParametersScrolled { get => Parameters.Skip(3).ToList(); }
     }
 }

@@ -39,7 +39,9 @@ namespace AdaptiveWpfLayout.Services
             var res = new List<Parameters>();
             var names = new string[] { "HR", "RR", "SpO2" };
 
-            for (int i = 0; i < _rnd.Next(10); ++i)
+            var count = _rnd.Next(10);
+
+            for (int i = 0; i < count; ++i)
             {
                 res.Add(new Parameters
                 {
