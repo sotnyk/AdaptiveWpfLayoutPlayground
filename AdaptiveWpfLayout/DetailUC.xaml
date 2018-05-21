@@ -80,7 +80,7 @@
                         <RowDefinition Height="*"/>
                     </Grid.RowDefinitions>
                     <ListView Name="ParametersFixedPart" Margin="10,0"
-                              ItemsSource="{Binding ParametersFixed}" BorderThickness="0">
+                              ItemsSource="{Binding ParametersFixed}" BorderThickness="0" SelectionChanged="ParametersFixedPart_SelectionChanged">
                         <ListView.Resources>
                             <Style TargetType="{x:Type GridViewColumnHeader}">
                                 <Setter Property="Width" Value="Auto"/>
@@ -105,7 +105,7 @@
                     <ListView Name="ParametersScrolledPart" Margin="10,0"
                               ItemsSource="{Binding ParametersScrolled}" 
                               BorderThickness="0"
-                              Grid.Row="1">
+                              Grid.Row="1" SelectionChanged="ParametersScrolledPart_SelectionChanged">
                         <ListView.Resources>
                             <Style TargetType="GridViewColumnHeader">
                                 <Setter Property="Visibility" Value="Collapsed" />

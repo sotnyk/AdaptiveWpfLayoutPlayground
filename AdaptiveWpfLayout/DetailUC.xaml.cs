@@ -62,6 +62,18 @@ namespace AdaptiveWpfLayout
         {
             if (e.PropertyName == nameof(ViewModelBase.IsInDesignMode))
                 e.Cancel = true;
-        }        
+        }
+
+        private void ParametersScrolledPart_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (ParametersScrolledPart.SelectedItem != null)
+                ParametersFixedPart.SelectedItem = null;
+        }
+
+        private void ParametersFixedPart_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (ParametersFixedPart.SelectedItem != null)
+                ParametersScrolledPart.SelectedItem = null;
+        }
     }
 }
